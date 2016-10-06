@@ -22,11 +22,11 @@ editor AddHystrix
 /* Run if there is a precondition of this being a spring boot project */
 
 let springCloudBuildDependencyManagementContent = """<dependency>
-<groupId>org.springframework.cloud</groupId>
-<artifactId>spring-cloud-dependencies</artifactId>
-<version>Camden.RELEASE</version>
-<type>pom</type>
-<scope>import</scope>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-dependencies</artifactId>
+  <version>Camden.RELEASE</version>
+  <type>pom</type>
+  <scope>import</scope>
 </dependency>"""
 
 with pom p when path = "pom.xml" begin
