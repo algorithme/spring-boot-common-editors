@@ -1,20 +1,14 @@
-scenario AddHystrix should do something amazing for developers...
-
-let my_value = "Hey there new Atomista"
-
-let sample_output_file = "samplefile.txt"
+scenario AddHystrix should add dependencies and configuration for Hystrix
 
 given
-  /* Selects the current project and its source files
-     as an initial point for then applying your editor
-  */
   ArchiveRoot
 
 when
-  /* Run your editor */
   AddHystrix
 
 then
-  /* Assert Something imoportant that your editor did */
-  fileExists sample_output_file
-  and fileContains sample_output_file my_value
+  fileExists "pom.xml"
+  and fileContains "pom.xml" "<groupId>org.springframework.cloud</groupId>"
+  and fileContains "pom.xml" "<artifactId>spring-cloud-starter-hystrix</artifactId>"
+  and fileContains "pom.xml" "<artifactId>spring-cloud-dependencies</artifactId>"
+  and fileContains "pom.xml" "<version>Camden.RELEASE</version>"

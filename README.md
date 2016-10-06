@@ -1,7 +1,5 @@
-spring-boot-c-editors
+spring-boot-common-editors
 ===========================
-
-Originally created on {{creation_date}}.
 
 Common editors for Spring Boot projects.
 

@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>atomist-project-templates</groupId>
-    <artifactId>spring-boot-c-editors</artifactId>
+    <artifactId>spring-boot-common-editors</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>spring-boot-c-editors</name>
+    <name>spring-boot-common-editors</name>
     <description>Common editors for Spring Boot projects.</description>
     <parent>
         <groupId>com.atomist</groupId>
@@ -14,9 +14,8 @@
         <relativePath>../../</relativePath>
     </parent>
     <properties></properties>
-    <dependencyManagement></dependencyManagement>
-    <dependencies>
-    </dependencies>
+    <dependencyManagement />
+    <dependencies />
     <repositories>
         <repository>
             <snapshots>
