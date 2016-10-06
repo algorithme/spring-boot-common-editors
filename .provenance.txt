@@ -1,0 +1,18 @@
+# generator info
+name: Rug Archive Project
+group: atomist-project-templates
+artifact: rug-archive
+version: 2.1.0
+
+# backing git repo
+repo: git@github.com:atomist-project-templates/rug-archive.git
+branch: master
+sha: 55aba45556f17626bbdb14e5a838a0f01ce960d9
+
+# parameter values
+project_name: spring-boot-c-editors
+group_id: atomist-project-templates
+version: 0.0.1
+description: Common editors for Spring Boot projects.
+editor_name: AddHystrix
+
