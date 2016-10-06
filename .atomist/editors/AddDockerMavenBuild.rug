@@ -24,7 +24,6 @@ param dockerRepository: .*
 AddGitMavenPlugin
 AddDockerMavenPlugin
 AddDockerMavenDependencyPlugin
-AddDockerMavenResourcesPlugin
 AddDockerfile
 AddReadmeDocumentation
 
@@ -32,71 +31,33 @@ with file f when path = "pom.xml"
   do replace "{{docker-repo}}" dockerRepository
 
 
-editor AddDockerMavenResourcesPlugin
-
-let mavenResourcesPlugin = """<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>prepare-dockerfile</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/docker-filtered</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/docker</directory>
-                                    <filtering>true</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>"""
-
-with pom p when path = "pom.xml"
-  do addOrReplaceBuildPlugin "org.apache.maven.plugins" "maven-resources-plugin" mavenResourcesPlugin
-
-
 editor AddDockerMavenDependencyPlugin
 
 let mavenDependencyPlugin = """<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
-                <executions>
-                    <execution>
-                        <id>unpack</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>${project.artifactId}</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>jar</type>
-                                    <outputDirectory>${project.build.directory}/docker</outputDirectory>
-                                    <includes>lib/*</includes>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>${project.artifactId}</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>jar</type>
-                                    <outputDirectory>${project.build.directory}/docker/classes</outputDirectory>
-                                    <excludes>lib/*</excludes>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>"""
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.10</version>
+				<executions>
+					<execution>
+						<id>unpack</id>
+						<phase>package</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.artifactId}</artifactId>
+									<version>${project.version}</version>
+									<type>jar</type>
+									<outputDirectory>${project.build.directory}/docker</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>"""
 
 with pom p when path = "pom.xml"
   do addOrReplaceBuildPlugin "org.apache.maven.plugins" "maven-dependency-plugin" mavenDependencyPlugin
@@ -105,28 +66,25 @@ with pom p when path = "pom.xml"
 editor AddDockerMavenPlugin
 
 let dockerMavenPlugin = """<plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.4.11</version>
-                <configuration>
-                    <imageName>{{docker-repo}}/${project.name}</imageName>
-                    <dockerDirectory>${project.build.directory}/docker-filtered</dockerDirectory>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                    <useConfigFile>true</useConfigFile>
-                    <forceTags>true</forceTags>
-                    <imageTags>
-                        <imageTag>${git.commit.id.abbrev}</imageTag>
-                        <imageTag>${project.version}</imageTag>
-                        <imageTag>latest</imageTag>
-                    </imageTags>
-                </configuration>
-            </plugin>"""
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.11</version>
+				<configuration>
+					<imageName>{{docker-repo}}/${project.name}</imageName>
+					<dockerDirectory>src/main/docker</dockerDirectory>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+					<useConfigFile>true</useConfigFile>
+					<imageTags>
+						<imageTag>${project.version}</imageTag>
+					</imageTags>
+				</configuration>
+			</plugin>"""
 
 with pom p when path = "pom.xml"
   do addOrReplaceBuildPlugin "com.spotify" "docker-maven-plugin" dockerMavenPlugin
