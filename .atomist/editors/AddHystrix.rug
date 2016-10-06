@@ -33,3 +33,7 @@ with pom p when path = "pom.xml" begin
   do addOrReplaceDependency "org.springframework.cloud" "spring-cloud-starter-hystrix"
   do addOrReplaceDependencyManagementDependency "org.springframework.cloud" "spring-cloud-dependencies" springCloudBuildDependencyManagementContent
 end
+
+with spring.bootProject p begin
+  do annotateBootApplication "org.springframework.cloud.client.circuitbreaker" "EnableCircuitBreaker"
+end
