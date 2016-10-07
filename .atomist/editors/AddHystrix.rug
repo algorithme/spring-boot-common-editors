@@ -20,7 +20,8 @@
 @description "Adds support for Netflix Hystrix to your Spring Boot project"
 editor AddHystrix
 
-/* Run if there is a precondition of this being a spring boot project */
+precondition IsSpringBoot
+precondition IsMaven
 
 let springCloudBuildDependencyManagementContent = """<dependency>
               <groupId>org.springframework.cloud</groupId>
@@ -38,3 +39,6 @@ end
 with spring.bootProject p begin
   do annotateBootApplication "org.springframework.cloud.client.circuitbreaker" "EnableCircuitBreaker"
 end
+
+predicate IsSpringBoot
+  with spring.bootProject

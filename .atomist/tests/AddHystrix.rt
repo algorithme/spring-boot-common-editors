@@ -14,3 +14,14 @@ then
   and fileContains "pom.xml" "<version>Camden.RELEASE</version>"
   and fileContains "src/main/java/com/atomist/springrest/SpringRestApplication.java" "@EnableCircuitBreaker"
   and fileContains "src/main/java/com/atomist/springrest/SpringRestApplication.java" "import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;"
+
+scenario AddHystrix should not work on an empty project
+
+given
+  Empty
+
+when
+  AddHystrix
+
+then
+  NotApplicable
