@@ -18,6 +18,8 @@
 @description "Adds Maven infrastructure and source files to package and distribute project as a Docker Image"
 editor AddDockerMavenBuild
 
+precondition IsMaven
+
 @description "Name of the docker repository to push artifacts to."
 param dockerRepository: .*
 

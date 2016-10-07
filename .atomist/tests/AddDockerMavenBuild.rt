@@ -109,3 +109,17 @@ then
   and fileExists "src/main/docker/Dockerfile"
   and fileContains pomFile dockerRepository
   and fileContains "README.md" "To run inside a docker container"
+
+
+scenario AddDockerMavenBuild should not work on an empty project
+
+let dockerRepository = "localhost:5000"
+
+given
+  Empty
+
+when
+  AddDockerMavenBuild
+
+then
+  NotApplicable

@@ -19,7 +19,7 @@
        <dependency>
             <groupId>com.atomist</groupId>
             <artifactId>rug-lib</artifactId>
-            <version>[1.0.4-20161004063057,1.1.0)</version>
+            <version>[1.0.4-20161007135412,1.1.0)</version>
         </dependency>
     </dependencies>
     <repositories>
